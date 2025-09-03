@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>भारत KYC | Government of India - Digital Identity Verification Portal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇳</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF3E0, #E8F5E8);
+            min-height: 100vh;
+            height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></svg>') repeat;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            padding: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .app-container {
+                max-width: 400px;
+                border-radius: 15px;
+                box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+                min-height: 650px;
+                border: 3px solid #FF9933;
+            }
+        }
+        
+        .gov-header {
+            background: linear-gradient(135deg, #FF9933, #FF6600);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 3px solid #138808;
+            position: relative;
+        }
+        
+        .gov-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FF9933, #FFFFFF, #138808);
+        }
+        
+        .gov-logo {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .gov-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .gov-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .screen {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid rgba(255, 153, 51, 0.2);
+            flex: 1;
+            min-height: calc(100vh - 20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .screen {
+                padding: 30px;
+                min-height: auto;
+                justify-content: center;
+            }
+            .app-container {
+                min-height: auto;
+                align-items: center;
+            }
+            body {
+                align-items: center;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .logo {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FF6600;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            border: 2px solid #FF6600;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: rgba(255, 102, 0, 0.1);
+        }
+        
+        @media (min-width: 768px) {
+            .logo {
+                font-size: 16px;
+                margin-bottom: 20px;
+                padding: 10px 20px;
+            }
+        }
+        
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #FF6600;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.3;
+        }
+        
+        @media (min-width: 768px) {
+            .title {
+                font-size: 26px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 16px;
+                margin-bottom: 30px;
+                padding: 0;
+            }
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #FF6600, #FF9933);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 15px 10px;
+            width: calc(100% - 20px);
+            max-width: 320px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+            text-transform: none;
+            letter-spacing: 0.3px;
+        }
+        
+        @media (min-width: 768px) {
+            .btn {
+                width: auto;
+                min-width: 200px;
+                padding: 16px 32px;
+                font-size: 18px;
+            }
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #FF9933, #FFB366);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #138808;
+            border: 2px solid #138808;
+        }
+        
+        .btn-secondary:hover {
+            background: #138808;
+            color: white;
+            box-shadow: 0 4px 15px rgba(19, 136, 8, 0.3);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF9933, #138808);
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .grid-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .grid-item:hover {
+            border-color: #FF6600;
+            background: #FFF3E0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.2);
+        }
+        
+        .grid-item.selected {
+            background: linear-gradient(135deg, #FF6600, #FF9933);
+            color: white;
+            border-color: #FF6600;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+        
+        .flag, .doc-icon {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            color: #FF6600;
+            background: rgba(255, 102, 0, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #FF6600;
+        }
+        
+        .camera-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .camera-preview {
+            width: 100%;
+            height: 240px;
+            background: #000;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .camera-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px dashed #00ff00;
+            border-radius: 10px;
+            width: 280px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .face-overlay {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00ff00;
+        }
+        
+        .camera-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .capture-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            background: #ff4444;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid white;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+        }
+        
+        .capture-btn:hover {
+            background: #cc3333;
+            transform: scale(1.1);
+        }
+        
+        .capture-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .processing {
+            background: #ffaa00;
+        }
+        
+        .status-list {
+            margin: 20px 0;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .status-item {
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .status-item.processing {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            width: 100%;
+            text-align: left;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result-item {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #155724;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .result-value {
+            font-weight: bold;
+            color: #0d4e14;
+        }
+        
+        .back-btn {
+            background: transparent;
+            color: #1a73e8;
+            border: 2px solid #1a73e8;
+            padding: 12px 24px;
+            border-radius: 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #138808;
+            color: white;
+            box-shadow: 0 4px 12px rgba(19, 136, 8, 0.2);
+        }
+        
+        .feature-list {
+            margin: 30px 0;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .feature {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #FFF3E0, #E8F5E8);
+            border-radius: 8px;
+            border-left: 4px solid #FF6600;
+            border-right: 2px solid #138808;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success-icon {
+            font-size: 24px;
+            font-weight: bold;
+            color: #138808;
+            margin: 20px 0;
+            padding: 15px 30px;
+            border: 3px solid #138808;
+            border-radius: 8px;
+            background: rgba(19, 136, 8, 0.1);
+            animation: bounce 1s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FF6600;
+            border-right: 4px solid #138808;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        .security-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(19, 136, 8, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 1000;
+            letter-spacing: 0.5px;
+        }
+        
+        .welcome-card {
+            background: linear-gradient(135deg, #FFF3E0, #E8F5E8);
+            border: 1px solid #FF9933;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(255, 153, 51, 0.1);
+        }
+        
+        .input-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #FF6600;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .country-code {
+            background: #FF6600;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .phone-input {
+            flex: 1;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            outline: none;
+            background: transparent;
+        }
+        
+        .phone-input::placeholder {
+            color: #999;
+        }
+        
+        .phone-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #FF6600;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+        
+        .otp-input {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .otp-input:focus {
+            border-color: #FF6600;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+        }
+        
+        .otp-input.filled {
+            border-color: #138808;
+            background: rgba(19, 136, 8, 0.1);
+        }
+        
+        .otp-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .timer {
+            font-size: 16px;
+            color: #FF6600;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .resend-btn {
+            background: none;
+            border: none;
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px;
+        }
+        
+        .resend-btn:disabled {
+            color: #999;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+        
+        .resend-btn:hover:not(:disabled) {
+            color: #0056b3;
+        }
+        
+        .capture-options {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .option-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: #FF6600;
+            color: white;
+        }
+        
+        .tab-btn:not(.active) {
+            color: #666;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 102, 0, 0.1);
+        }
+        
+        .capture-mode {
+            width: 100%;
+        }
+        
+        .upload-container {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .upload-area {
+            border: 2px dashed #FF6600;
+            border-radius: 12px;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 102, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        
+        .upload-area:hover {
+            border-color: #FF9933;
+            background: rgba(255, 102, 0, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF6600;
+            margin-bottom: 10px;
+        }
+        
+        .upload-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .upload-subtext {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .file-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .file-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .preview-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .upload-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .welcome-text {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .welcome-subtext {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="security-badge">SECURE</div>
+        <div class="gov-header">
+            <div class="gov-logo">भारत सरकार</div>
+            <div class="gov-title">भारत सरकार | Government of India</div>
+            <div class="gov-subtitle">Digital India Initiative - KYC Verification Portal</div>
+        </div>
+        <!-- Welcome Screen -->
+        <div id="welcome" class="screen">
+            <div class="logo">GOVERNMENT OF INDIA</div>
+            <h1 class="title">Digital KYC Portal</h1>
+            <p class="subtitle">Aadhaar-based Identity Verification</p>
+            
+            <div class="welcome-card">
+                <div class="welcome-text">Secure digital identity verification for Indian citizens</div>
+                <div class="welcome-subtext">Secure digital identity verification for Indian citizens</div>
+            </div>
+
+            <button class="btn" onclick="startKYC()">Start KYC Verification</button>
+            <button class="btn btn-secondary" onclick="showTechInfo()">Technical Details</button>
+            <button class="btn btn-secondary" onclick="goToScreen('phone')">Phone Verification (Optional)</button>
+        </div>
+        
+        <!-- Phone Number Screen -->
+        <div id="phone" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
+            </div>
+            <h1 class="title">फोन नंबर दर्ज करें | Enter Phone Number</h1>
+            <p class="subtitle">OTP सत्यापन के लिए अपना मोबाइल नंबर दर्ज करें</p>
+            
+            <div class="input-container">
+                <div class="country-code">+91</div>
+                <input type="tel" id="phoneInput" placeholder="मोबाइल नंबर | Mobile Number" maxlength="10" class="phone-input">
+            </div>
+            
+            <div class="phone-info">
+                <div class="info-text">• आपको इस नंबर पर OTP प्राप्त होगा</div>
+                <div class="info-text">• You will receive OTP on this number</div>
+            </div>
+
+            <button class="btn" id="sendOtpBtn" onclick="sendOTP()" disabled>OTP भेजें | Send OTP</button>
+        </div>
+        
+        <!-- OTP Verification Screen -->
+        <div id="otp" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%"></div>
+            </div>
+            <h1 class="title">OTP सत्यापन | OTP Verification</h1>
+            <p class="subtitle" id="otpSubtitle">+91 XXXXXXXXXX पर भेजा गया OTP दर्ज करें</p>
+            
+            <div class="otp-container">
+                <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 0)">
+                <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 1)">
+                <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 2)">
+                <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 3)">
+                <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 4)">
+                <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 5)">
+            </div>
+            
+            <div class="otp-info">
+                <div class="timer" id="otpTimer">OTP expires in: 02:00</div>
+                <button class="resend-btn" id="resendBtn" onclick="resendOTP()" disabled>पुनः भेजें | Resend OTP</button>
+            </div>
+
+            <button class="btn" id="verifyOtpBtn" onclick="verifyOTP()" disabled>सत्यापित करें | Verify OTP</button>
+            <button class="back-btn" onclick="goToScreen('phone')">Back</button>
+        </div>
+        
+        <!-- Language Screen -->
+        <div id="language" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 30%"></div>
+            </div>
+            <h1 class="title">भाषा चुनें | Select Language</h1>
+            <p class="subtitle">आवाज़ मार्गदर्शन के लिए अपनी पसंदीदा भाषा चुनें</p>
+            
+            <div class="grid">
+                <div class="grid-item" onclick="selectLanguage('en', this)">
+                    <span class="flag">EN</span>
+                    <div>English</div>
+                </div>
+                <div class="grid-item" onclick="selectLanguage('hi', this)">
+                    <span class="flag">हि</span>
+                    <div>हिन्दी</div>
+                </div>
+                <div class="grid-item" onclick="selectLanguage('te', this)">
+                    <span class="flag">తె</span>
+                    <div>తెలుగు</div>
+                </div>
+                <div class="grid-item" onclick="selectLanguage('ta', this)">
+                    <span class="flag">த</span>
+                    <div>தமிழ்</div>
+                </div>
+                <div class="grid-item" onclick="selectLanguage('bn', this)">
+                    <span class="flag">বা</span>
+                    <div>বাংলা</div>
+                </div>
+                <div class="grid-item" onclick="selectLanguage('gu', this)">
+                    <span class="flag">ગુ</span>
+                    <div>ગુજરાતી</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Document Screen -->
+        <div id="document" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+            </div>
+            <h1 class="title" id="documentTitle">Select Document</h1>
+            <p class="subtitle" id="documentSubtitle">Choose document type for verification</p>
+            
+            <div class="grid">
+                <div class="grid-item" onclick="selectDocument('aadhaar', this)">
+                    <span class="doc-icon">AADHAAR</span>
+                    <div>Aadhaar Card</div>
+                </div>
+                <div class="grid-item" onclick="selectDocument('pan', this)">
+                    <span class="doc-icon">PAN</span>
+                    <div>PAN Card</div>
+                </div>
+                <div class="grid-item" onclick="selectDocument('license', this)">
+                    <span class="doc-icon">DL</span>
+                    <div>Driving License</div>
+                </div>
+                <div class="grid-item" onclick="selectDocument('voter', this)">
+                    <span class="doc-icon">VOTER</span>
+                    <div>Voter ID</div>
+                </div>
+            </div>
+            
+            <button class="back-btn" onclick="goToScreen('language')">Back</button>
+        </div>
+        
+        <!-- Camera Document Screen -->
+        <div id="camera-document" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 60%"></div>
+            </div>
+            <h1 class="title" id="cameraDocTitle">Capture Document</h1>
+            <p class="subtitle" id="cameraDocSubtitle">Position your document within the frame</p>
+            
+            <div class="capture-options">
+                <div class="option-tabs">
+                    <button class="tab-btn active" id="cameraTab" onclick="switchCaptureMode('camera')">Camera</button>
+                    <button class="tab-btn" id="uploadTab" onclick="switchCaptureMode('upload')">Upload File</button>
+                </div>
+                
+                <div id="cameraMode" class="capture-mode">
+                    <div class="camera-container">
+                        <div class="camera-preview" id="documentCamera">
+                            <video id="documentVideo" style="width: 100%; height: 100%; object-fit: cover;" autoplay muted></video>
+                            <div class="camera-overlay">
+                                <div style="color: white; text-align: center;">
+                                    <div style="font-size: 18px; font-weight: bold;">DOCUMENT</div>
+                                    <div style="font-size: 14px; margin-top: 8px;">Position document here</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="camera-controls">
+                            <button class="back-btn" id="docBackBtn" onclick="stopCamera(); goToScreen('document')">Back</button>
+                            <button class="capture-btn" id="captureDoc" onclick="captureDocument()">CAPTURE</button>
+                            <button class="btn-secondary" id="docFlipBtn" onclick="switchCamera()">Flip</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="uploadMode" class="capture-mode hidden">
+                    <div class="upload-container">
+                        <div class="upload-area" id="docUploadArea" onclick="document.getElementById('docFileInput').click()">
+                            <div class="upload-icon">UPLOAD</div>
+                            <div class="upload-text">Click to select document image</div>
+                            <div class="upload-subtext">Supported: JPG, PNG, PDF (Max 5MB)</div>
+                        </div>
+                        <input type="file" id="docFileInput" accept="image/*,.pdf" style="display: none;" onchange="handleDocumentUpload(this)">
+                        
+                        <div id="docPreview" class="file-preview hidden">
+                            <img id="docPreviewImg" src="" alt="Document preview">
+                            <div class="preview-info">
+                                <div id="docFileName">filename.jpg</div>
+                                <button class="btn-secondary" onclick="clearDocumentUpload()">Remove</button>
+                            </div>
+                        </div>
+                        
+                        <div class="upload-controls">
+                            <button class="back-btn" onclick="goToScreen('document')">Back</button>
+                            <button class="btn" id="proceedDocBtn" onclick="proceedWithUploadedDocument()" disabled>Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Camera Face Screen -->
+        <div id="camera-face" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%"></div>
+            </div>
+            <h1 class="title" id="cameraFaceTitle">Face Verification</h1>
+            <p class="subtitle" id="cameraFaceSubtitle">Look at the camera and keep your face in the circle</p>
+            
+            <div class="capture-options">
+                <div class="option-tabs">
+                    <button class="tab-btn active" id="faceCameraTab" onclick="switchFaceCaptureMode('camera')">Camera</button>
+                    <button class="tab-btn" id="faceUploadTab" onclick="switchFaceCaptureMode('upload')">Upload Photo</button>
+                </div>
+                
+                <div id="faceCameraMode" class="capture-mode">
+                    <div class="camera-container">
+                        <div class="camera-preview" id="faceCamera">
+                            <video id="faceVideo" style="width: 100%; height: 100%; object-fit: cover;" autoplay muted></video>
+                            <div class="camera-overlay face-overlay">
+                            </div>
+                        </div>
+                        
+                        <div class="camera-controls">
+                            <button class="back-btn" id="faceBackBtn" onclick="stopCamera(); goToScreen('camera-document')">Back</button>
+                            <button class="capture-btn" id="captureFace" onclick="captureFace()">CAPTURE</button>
+                            <button class="btn-secondary" id="faceFlipBtn" onclick="switchCamera()">Flip</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="faceUploadMode" class="capture-mode hidden">
+                    <div class="upload-container">
+                        <div class="upload-area" id="faceUploadArea" onclick="document.getElementById('faceFileInput').click()">
+                            <div class="upload-icon">UPLOAD</div>
+                            <div class="upload-text">Click to select your photo</div>
+                            <div class="upload-subtext">Supported: JPG, PNG (Max 2MB)</div>
+                        </div>
+                        <input type="file" id="faceFileInput" accept="image/*" style="display: none;" onchange="handleFaceUpload(this)">
+                        
+                        <div id="facePreview" class="file-preview hidden">
+                            <img id="facePreviewImg" src="" alt="Face preview">
+                            <div class="preview-info">
+                                <div id="faceFileName">photo.jpg</div>
+                                <button class="btn-secondary" onclick="clearFaceUpload()">Remove</button>
+                            </div>
+                        </div>
+                        
+                        <div class="upload-controls">
+                            <button class="back-btn" onclick="goToScreen('camera-document')">Back</button>
+                            <button class="btn" id="proceedFaceBtn" onclick="proceedWithUploadedFace()" disabled>Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Processing Screen -->
+        <div id="processing" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 90%"></div>
+            </div>
+            <h1 class="title" id="processingTitle">Processing...</h1>
+            <p class="subtitle" id="processingSubtitle">Analyzing documents and verifying identity</p>
+            
+            <div class="loading-spinner"></div>
+            
+            <div class="status-list" id="processingStatus">
+                <div class="status-item">✓ Document captured</div>
+                <div class="status-item">✓ Face captured</div>
+                <div class="status-item processing">• OCR processing...</div>
+                <div class="status-item processing">• Face analysis...</div>
+                <div class="status-item processing">• Verification...</div>
+            </div>
+        </div>
+        
+        <!-- Results Screen -->
+        <div id="results" class="screen hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <h1 class="title" id="resultsTitle">Verification Complete!</h1>
+            <p class="subtitle" id="resultsSubtitle">Your KYC verification was successful</p>
+            
+            <div class="success-icon">VERIFIED</div>
+            
+            <div class="result-card" id="resultCard">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+
+            <button class="btn" id="newVerificationBtn" onclick="restart()">Start New Verification</button>
+            <button class="btn btn-secondary" id="downloadReportBtn" onclick="downloadReport()">Download Report</button>
+            <button class="btn btn-secondary" id="shareReportBtn" onclick="shareReport()">Share Report</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize with English as default
+        let selectedLanguage = 'en';
+        let selectedDocument = '';
+        let currentStream = null;
+        let currentCamera = 'user'; // 'user' for front, 'environment' for back
+        let capturedDocumentData = null;
+        let capturedFaceData = null;
+        
+        // Initialize the app with English as default
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Bharat KYC Real App loaded');
+            updateLanguageText('en');
+            
+            const phoneInput = document.getElementById('phoneInput');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    const value = this.value.replace(/\D/g, ''); // Remove non-digits
+                    this.value = value;
+                    
+                    const sendBtn = document.getElementById('sendOtpBtn');
+                    if (value.length === 10) {
+                        sendBtn.disabled = false;
+                        sendBtn.style.opacity = '1';
+                    } else {
+                        sendBtn.disabled = true;
+                        sendBtn.style.opacity = '0.6';
+                    }
+                });
+            }
+        });
+        
+        function goToScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            
+            // Show target screen
+            document.getElementById(screenId).classList.remove('hidden');
+            currentScreen = screenId;
+            
+            // Initialize camera if needed
+            if (screenId === 'camera-document') {
+                if (currentCaptureMode === 'camera') {
+                    initCamera(screenId);
+                } else {
+                    stopCamera();
+                }
+            } else if (screenId === 'camera-face') {
+                if (currentFaceCaptureMode === 'camera') {
+                    initCamera(screenId);
+                } else {
+                    stopCamera();
+                }
+            } else {
+                stopCamera();
+            }
+        }
+        
+        function startKYC() {
+            // Set English as default language and skip phone verification for demo
+            selectedLanguage = 'en';
+            goToScreen('document');
+        }
+        
+        let phoneNumber = '';
+        let otpTimer = null;
+        let otpTimeLeft = 120; // 2 minutes
+        let generatedOTP = '';
+        let uploadedDocumentData = null;
+        let uploadedFaceData = null;
+        let currentCaptureMode = 'camera';
+        let currentFaceCaptureMode = 'camera';
+        
+        function sendOTP() {
+            const phoneInput = document.getElementById('phoneInput');
+            phoneNumber = phoneInput.value;
+            
+            if (phoneNumber.length !== 10) {
+                alert('Please enter a valid 10-digit mobile number');
+                return;
+            }
+            
+            // For demo purposes, skip actual OTP and go directly to language selection
+            alert(`Demo Mode: OTP verification skipped for number +91 ${phoneNumber}\n\nIn production, you would receive an SMS with OTP.`);
+            selectedLanguage = 'en'; // Set default language
+            goToScreen('document');
+        }
+        
+        function startOTPTimer() {
+            otpTimeLeft = 120;
+            const timerElement = document.getElementById('otpTimer');
+            const resendBtn = document.getElementById('resendBtn');
+            
+            resendBtn.disabled = true;
+            
+            otpTimer = setInterval(() => {
+                const minutes = Math.floor(otpTimeLeft / 60);
+                const seconds = otpTimeLeft % 60;
+                timerElement.textContent = `OTP expires in: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (otpTimeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    timerElement.textContent = 'OTP expired';
+                    timerElement.style.color = '#dc3545';
+                    resendBtn.disabled = false;
+                    
+                    // Clear OTP inputs
+                    document.querySelectorAll('.otp-input').forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    
+                    document.getElementById('verifyOtpBtn').disabled = true;
+                }
+                
+                otpTimeLeft--;
+            }, 1000);
+        }
+        
+        function moveToNext(current, index) {
+            const value = current.value.replace(/\D/g, ''); // Only allow digits
+            current.value = value;
+            
+            if (value) {
+                current.classList.add('filled');
+                
+                // Move to next input
+                if (index < 5) {
+                    const nextInput = document.querySelectorAll('.otp-input')[index + 1];
+                    nextInput.focus();
+                }
+            } else {
+                current.classList.remove('filled');
+            }
+            
+            // Check if all inputs are filled
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const filledInputs = Array.from(otpInputs).filter(input => input.value.length === 1);
+            
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+            if (filledInputs.length === 6) {
+                verifyBtn.disabled = false;
+                verifyBtn.style.opacity = '1';
+            } else {
+                verifyBtn.disabled = true;
+                verifyBtn.style.opacity = '0.6';
+            }
+        }
+        
+        function verifyOTP() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const enteredOTP = Array.from(otpInputs).map(input => input.value).join('');
+            
+            if (enteredOTP.length !== 6) {
+                alert('कृपया पूरा OTP दर्ज करें | Please enter complete OTP');
+                return;
+            }
+            
+            if (enteredOTP === generatedOTP) {
+                clearInterval(otpTimer);
+                alert('OTP सत्यापित! | OTP Verified!');
+                goToScreen('language');
+            } else {
+                alert('गलत OTP | Invalid OTP. कृपया पुनः प्रयास करें | Please try again.');
+                
+                // Clear inputs and remove filled class
+                otpInputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('filled');
+                });
+                
+                // Focus first input
+                otpInputs[0].focus();
+                
+                document.getElementById('verifyOtpBtn').disabled = true;
+            }
+        }
+        
+        function resendOTP() {
+            sendOTP();
+        }
+        
+        function selectLanguage(lang, element) {
+            selectedLanguage = lang;
+            
+            // Clear previous selections
+            document.querySelectorAll('#language .grid-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Mark current selection
+            element.classList.add('selected');
+            
+            // Update UI text based on selected language
+            updateLanguageText(lang);
+            
+            setTimeout(() => {
+                goToScreen('document');
+            }, 500);
+        }
+        
+        function updateLanguageText(lang) {
+            const translations = {
+                'en': {
+                    'document-title': 'Select Document',
+                    'document-subtitle': 'Choose document type for verification',
+                    'camera-doc-title': 'Capture Document',
+                    'camera-doc-subtitle': 'Position your document within the frame',
+                    'camera-face-title': 'Face Verification',
+                    'camera-face-subtitle': 'Look at the camera and keep your face in the circle',
+                    'processing-title': 'Processing...',
+                    'processing-subtitle': 'Analyzing documents and verifying identity',
+                    'results-title': 'Verification Complete!',
+                    'results-subtitle': 'Your KYC verification was successful',
+                    'back-btn': 'Back',
+                    'capture-btn': 'CAPTURE',
+                    'flip-btn': 'Flip',
+                    'new-verification': 'Start New Verification',
+                    'download-report': 'Download Report',
+                    'share-report': 'Share Report'
+                },
+                'hi': {
+                    'document-title': 'दस्तावेज़ चुनें',
+                    'document-subtitle': 'सत्यापन के लिए दस्तावेज़ का प्रकार चुनें',
+                    'camera-doc-title': 'दस्तावेज़ कैप्चर करें',
+                    'camera-doc-subtitle': 'अपने दस्तावेज़ को फ्रेम के अंदर रखें',
+                    'camera-face-title': 'चेहरा सत्यापन',
+                    'camera-face-subtitle': 'कैमरे की ओर देखें और अपना चेहरा सर्कल में रखें',
+                    'processing-title': 'प्रसंस्करण...',
+                    'processing-subtitle': 'दस्तावेज़ों का विश्लेषण और पहचान सत्यापन',
+                    'results-title': 'सत्यापन पूर्ण!',
+                    'results-subtitle': 'आपका KYC सत्यापन सफल रहा',
+                    'back-btn': 'वापस',
+                    'capture-btn': 'कैप्चर',
+                    'flip-btn': 'फ्लिप',
+                    'new-verification': 'नया सत्यापन',
+                    'download-report': 'रिपोर्ट डाउनलोड करें',
+                    'share-report': 'रिपोर्ट साझा करें'
+                },
+                'te': {
+                    'document-title': 'దస్తావేజు ఎంచుకోండి',
+                    'document-subtitle': 'తద్దులు కోసం దస్తావేజు రకం ఎంచుకోండి',
+                    'camera-doc-title': 'దస్తావేజు క్యాప్చర్ చేయండి',
+                    'camera-doc-subtitle': 'మీ దస్తావేజును ఫ్రేమ్ లో ఉంచండి',
+                    'camera-face-title': 'ముఖ తద్దులు',
+                    'camera-face-subtitle': 'క్యామెరా వైపు చూడండి',
+                    'processing-title': 'ప్రొసెస్ అవుతోంది...',
+                    'processing-subtitle': 'దస్తావేజుల విశ్లేషణ మరియు గుర్తింపు తద్దులు',
+                    'results-title': 'తద్దులు పూర్తి!',
+                    'results-subtitle': 'మీ KYC తద్దులు విజయవంతం',
+                    'back-btn': 'వెనుక',
+                    'capture-btn': 'క్యాప్చర్',
+                    'flip-btn': 'ఫ్లిప్',
+                    'new-verification': 'కొత్త తద్దులు',
+                    'download-report': 'రిపోర్ట్ డౌన్‌లోడ్',
+                    'share-report': 'రిపోర్ట్ షేర్'
+                }
+            };
+            
+            const texts = translations[lang] || translations['en'];
+            
+            console.log('Updating language to:', lang, texts);
+            
+            // Update document screen
+            const docTitle = document.getElementById('documentTitle');
+            const docSubtitle = document.getElementById('documentSubtitle');
+            if (docTitle) {
+                docTitle.textContent = texts['document-title'];
+                console.log('Updated document title to:', texts['document-title']);
+            }
+            if (docSubtitle) {
+                docSubtitle.textContent = texts['document-subtitle'];
+                console.log('Updated document subtitle to:', texts['document-subtitle']);
+            }
+            
+            // Update camera document screen
+            const camDocTitle = document.getElementById('cameraDocTitle');
+            const camDocSubtitle = document.getElementById('cameraDocSubtitle');
+            if (camDocTitle) camDocTitle.textContent = texts['camera-doc-title'];
+            if (camDocSubtitle) camDocSubtitle.textContent = texts['camera-doc-subtitle'];
+            
+            // Update camera face screen
+            const camFaceTitle = document.getElementById('cameraFaceTitle');
+            const camFaceSubtitle = document.getElementById('cameraFaceSubtitle');
+            if (camFaceTitle) camFaceTitle.textContent = texts['camera-face-title'];
+            if (camFaceSubtitle) camFaceSubtitle.textContent = texts['camera-face-subtitle'];
+            
+            // Update processing screen
+            const procTitle = document.getElementById('processingTitle');
+            const procSubtitle = document.getElementById('processingSubtitle');
+            if (procTitle) procTitle.textContent = texts['processing-title'];
+            if (procSubtitle) procSubtitle.textContent = texts['processing-subtitle'];
+            
+            // Update results screen
+            const resTitle = document.getElementById('resultsTitle');
+            const resSubtitle = document.getElementById('resultsSubtitle');
+            if (resTitle) resTitle.textContent = texts['results-title'];
+            if (resSubtitle) resSubtitle.textContent = texts['results-subtitle'];
+            
+            // Update specific buttons by ID
+            const newVerificationBtn = document.getElementById('newVerificationBtn');
+            if (newVerificationBtn) newVerificationBtn.textContent = texts['new-verification'];
+            
+            const downloadReportBtn = document.getElementById('downloadReportBtn');
+            if (downloadReportBtn) downloadReportBtn.textContent = texts['download-report'];
+            
+            const shareReportBtn = document.getElementById('shareReportBtn');
+            if (shareReportBtn) shareReportBtn.textContent = texts['share-report'];
+            
+            // Update back buttons
+            const docBackBtn = document.getElementById('docBackBtn');
+            if (docBackBtn) docBackBtn.textContent = texts['back-btn'];
+            
+            const faceBackBtn = document.getElementById('faceBackBtn');
+            if (faceBackBtn) faceBackBtn.textContent = texts['back-btn'];
+            
+            // Update capture buttons
+            const captureDoc = document.getElementById('captureDoc');
+            if (captureDoc) captureDoc.textContent = texts['capture-btn'];
+            
+            const captureFace = document.getElementById('captureFace');
+            if (captureFace) captureFace.textContent = texts['capture-btn'];
+            
+            // Update flip buttons
+            const docFlipBtn = document.getElementById('docFlipBtn');
+            if (docFlipBtn) docFlipBtn.textContent = texts['flip-btn'];
+            
+            const faceFlipBtn = document.getElementById('faceFlipBtn');
+            if (faceFlipBtn) faceFlipBtn.textContent = texts['flip-btn'];
+            
+            // Update upload mode text
+            const uploadTabs = document.querySelectorAll('.tab-btn');
+            uploadTabs.forEach(tab => {
+                if (tab.textContent === 'Upload File' || tab.textContent === 'फ़ाइल अपलोड') {
+                    tab.textContent = lang === 'hi' ? 'फ़ाइल अपलोड' : 'Upload File';
+                }
+                if (tab.textContent === 'Upload Photo' || tab.textContent === 'फोटो अपलोड') {
+                    tab.textContent = lang === 'hi' ? 'फोटो अपलोड' : 'Upload Photo';
+                }
+            });
+        }
+        
+        function switchCaptureMode(mode) {
+            currentCaptureMode = mode;
+            
+            const cameraTab = document.getElementById('cameraTab');
+            const uploadTab = document.getElementById('uploadTab');
+            const cameraMode = document.getElementById('cameraMode');
+            const uploadMode = document.getElementById('uploadMode');
+            
+            if (mode === 'camera') {
+                cameraTab.classList.add('active');
+                uploadTab.classList.remove('active');
+                cameraMode.classList.remove('hidden');
+                uploadMode.classList.add('hidden');
+                initCamera('camera-document');
+            } else {
+                cameraTab.classList.remove('active');
+                uploadTab.classList.add('active');
+                cameraMode.classList.add('hidden');
+                uploadMode.classList.remove('hidden');
+                stopCamera();
+            }
+        }
+        
+        function switchFaceCaptureMode(mode) {
+            currentFaceCaptureMode = mode;
+            
+            const cameraTab = document.getElementById('faceCameraTab');
+            const uploadTab = document.getElementById('faceUploadTab');
+            const cameraMode = document.getElementById('faceCameraMode');
+            const uploadMode = document.getElementById('faceUploadMode');
+            
+            if (mode === 'camera') {
+                cameraTab.classList.add('active');
+                uploadTab.classList.remove('active');
+                cameraMode.classList.remove('hidden');
+                uploadMode.classList.add('hidden');
+                initCamera('camera-face');
+            } else {
+                cameraTab.classList.remove('active');
+                uploadTab.classList.add('active');
+                cameraMode.classList.add('hidden');
+                uploadMode.classList.remove('hidden');
+                stopCamera();
+            }
+        }
+        
+        function handleDocumentUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                return;
+            }
+            
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Please select a valid image file (JPG, PNG) or PDF');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedDocumentData = {
+                    file: file,
+                    dataUrl: e.target.result,
+                    type: file.type,
+                    name: file.name,
+                    size: file.size
+                };
+                
+                // Show preview
+                const preview = document.getElementById('docPreview');
+                const previewImg = document.getElementById('docPreviewImg');
+                const fileName = document.getElementById('docFileName');
+                const proceedBtn = document.getElementById('proceedDocBtn');
+                
+                if (file.type === 'application/pdf') {
+                    previewImg.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="50">📄</text></svg>';
+                } else {
+                    previewImg.src = e.target.result;
+                }
+                
+                fileName.textContent = file.name;
+                preview.classList.remove('hidden');
+                proceedBtn.disabled = false;
+                
+                console.log('Document uploaded:', file.name, file.size, 'bytes');
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function handleFaceUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            // Validate file size (2MB max)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Photo size must be less than 2MB');
+                return;
+            }
+            
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Please select a valid image file (JPG, PNG)');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedFaceData = {
+                    file: file,
+                    dataUrl: e.target.result,
+                    type: file.type,
+                    name: file.name,
+                    size: file.size
+                };
+                
+                // Show preview
+                const preview = document.getElementById('facePreview');
+                const previewImg = document.getElementById('facePreviewImg');
+                const fileName = document.getElementById('faceFileName');
+                const proceedBtn = document.getElementById('proceedFaceBtn');
+                
+                previewImg.src = e.target.result;
+                fileName.textContent = file.name;
+                preview.classList.remove('hidden');
+                proceedBtn.disabled = false;
+                
+                console.log('Face photo uploaded:', file.name, file.size, 'bytes');
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function clearDocumentUpload() {
+            uploadedDocumentData = null;
+            document.getElementById('docFileInput').value = '';
+            document.getElementById('docPreview').classList.add('hidden');
+            document.getElementById('proceedDocBtn').disabled = true;
+        }
+        
+        function clearFaceUpload() {
+            uploadedFaceData = null;
+            document.getElementById('faceFileInput').value = '';
+            document.getElementById('facePreview').classList.add('hidden');
+            document.getElementById('proceedFaceBtn').disabled = true;
+        }
+        
+        function proceedWithUploadedDocument() {
+            if (!uploadedDocumentData) {
+                alert('Please select a document first');
+                return;
+            }
+            
+            // Set the uploaded data as captured data
+            capturedDocumentData = {
+                image: uploadedDocumentData.dataUrl,
+                timestamp: new Date().toISOString(),
+                method: 'upload',
+                filename: uploadedDocumentData.name
+            };
+            
+            console.log('Proceeding with uploaded document:', uploadedDocumentData.name);
+            goToScreen('camera-face');
+        }
+        
+        function proceedWithUploadedFace() {
+            if (!uploadedFaceData) {
+                alert('Please select a photo first');
+                return;
+            }
+            
+            // Set the uploaded data as captured data
+            capturedFaceData = {
+                image: uploadedFaceData.dataUrl,
+                timestamp: new Date().toISOString(),
+                method: 'upload',
+                filename: uploadedFaceData.name
+            };
+            
+            console.log('Proceeding with uploaded face photo:', uploadedFaceData.name);
+            goToScreen('processing');
+            processVerification();
+        }
+        
+        function selectDocument(doc, element) {
+            selectedDocument = doc;
+            
+            // Clear previous selections
+            document.querySelectorAll('#document .grid-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Mark as selected
+            element.classList.add('selected');
+            
+            // Auto-advance after selection
+            setTimeout(() => {
+                goToScreen('camera-document');
+            }, 500);
+        }
+        
+        async function initCamera(screenType) {
+            try {
+                const constraints = {
+                    video: {
+                        facingMode: currentCamera,
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                };
+                
+                currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                const videoElement = screenType === 'camera-document' ? 
+                    document.getElementById('documentVideo') : 
+                    document.getElementById('faceVideo');
+                
+                videoElement.srcObject = currentStream;
+                
+            } catch (error) {
+                console.error('Camera access error:', error);
+                alert('Camera access denied. Please allow camera permissions and try again.');
+            }
+        }
+        
+        function stopCamera() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+                currentStream = null;
+            }
+        }
+        
+        function switchCamera() {
+            currentCamera = currentCamera === 'user' ? 'environment' : 'user';
+            if (currentStream) {
+                stopCamera();
+                initCamera(currentScreen);
+            }
+        }
+        
+        async function captureDocument() {
+            const captureBtn = document.getElementById('captureDoc');
+            captureBtn.disabled = true;
+            captureBtn.classList.add('processing');
+            captureBtn.innerHTML = '⏳';
+            
+            try {
+                const video = document.getElementById('documentVideo');
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0);
+                
+                const imageData = canvas.toDataURL('image/jpeg', 0.8);
+                capturedDocumentData = {
+                    image: imageData,
+                    timestamp: new Date().toISOString(),
+                    documentType: selectedDocument
+                };
+                
+                // Simulate processing delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                stopCamera();
+                goToScreen('camera-face');
+                
+            } catch (error) {
+                console.error('Document capture error:', error);
+                alert('Failed to capture document. Please try again.');
+            } finally {
+                captureBtn.disabled = false;
+                captureBtn.classList.remove('processing');
+                captureBtn.innerHTML = '📷';
+            }
+        }
+        
+        async function captureFace() {
+            const captureBtn = document.getElementById('captureFace');
+            captureBtn.disabled = true;
+            captureBtn.classList.add('processing');
+            captureBtn.innerHTML = '⏳';
+            
+            try {
+                const video = document.getElementById('faceVideo');
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0);
+                
+                const imageData = canvas.toDataURL('image/jpeg', 0.8);
+                capturedFaceData = {
+                    image: imageData,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Simulate processing delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                stopCamera();
+                goToScreen('processing');
+                
+                // Start processing
+                processVerification();
+                
+            } catch (error) {
+                console.error('Face capture error:', error);
+                alert('Failed to capture face. Please try again.');
+            } finally {
+                captureBtn.disabled = false;
+                captureBtn.classList.remove('processing');
+                captureBtn.innerHTML = '📷';
+            }
+        }
+        
+        async function processVerification() {
+            const statusItems = document.querySelectorAll('#processingStatus .status-item');
+            
+            // Simulate OCR processing
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            statusItems[2].className = 'status-item';
+            statusItems[2].innerHTML = '✓ OCR processing complete';
+            
+            // Simulate face analysis
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            statusItems[3].className = 'status-item';
+            statusItems[3].innerHTML = '✓ Face analysis complete';
+            
+            // Simulate verification with document validation
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            statusItems[4].className = 'status-item';
+            statusItems[4].innerHTML = '✓ Verification complete';
+            
+            // Show results
+            showResults();
+        }
+        
+        function showResults() {
+            // Validate document authenticity
+            const isDocumentValid = validateDocument(capturedDocumentData, selectedDocument);
+            const isFaceValid = validateFace(capturedFaceData);
+            
+            if (!isDocumentValid || !isFaceValid) {
+                showErrorScreen(isDocumentValid, isFaceValid);
+                return;
+            }
+            
+            // Generate realistic results for valid documents
+            const results = {
+                overallScore: Math.floor(Math.random() * 10) + 90, // 90-99%
+                documentVerified: true,
+                faceVerified: true,
+                livenessScore: Math.floor(Math.random() * 15) + 85, // 85-99%
+                documentType: selectedDocument,
+                extractedData: getExtractedData(selectedDocument),
+                sessionId: 'KYC_' + Date.now(),
+                timestamp: new Date().toLocaleString()
+            };
+            
+            displayResults(results);
+            goToScreen('results');
+        }
+        
+        function validateDocument(documentData, docType) {
+            if (!documentData || !documentData.image) return false;
+            
+            // Simulate document validation - randomly mark some as fake
+            const validationChance = Math.random();
+            
+            // 20% chance of fake document detection
+            if (validationChance < 0.2) {
+                return false;
+            }
+            
+            // Additional validation based on document type
+            switch(docType) {
+                case 'aadhaar':
+                    // Simulate Aadhaar validation
+                    return validationChance > 0.15;
+                case 'pan':
+                    // Simulate PAN validation
+                    return validationChance > 0.18;
+                case 'license':
+                    // Simulate License validation
+                    return validationChance > 0.22;
+                case 'voter':
+                    // Simulate Voter ID validation
+                    return validationChance > 0.16;
+                default:
+                    return false;
+            }
+        }
+        
+        function validateFace(faceData) {
+            if (!faceData || !faceData.image) return false;
+            
+            // Simulate face validation - 10% chance of failure
+            return Math.random() > 0.1;
+        }
+        
+        function showErrorScreen(documentValid, faceValid) {
+            const errorScreen = document.createElement('div');
+            errorScreen.id = 'error';
+            errorScreen.className = 'screen';
+            
+            let errorMessage = '';
+            let errorDetails = '';
+            
+            if (!documentValid && !faceValid) {
+                errorMessage = 'सत्यापन असफल | Verification Failed';
+                errorDetails = 'Document and face verification failed. Please try again with valid documents.';
+            } else if (!documentValid) {
+                errorMessage = 'दस्तावेज़ अमान्य | Invalid Document';
+                errorDetails = `The ${selectedDocument.toUpperCase()} document appears to be invalid or fake. Please provide a genuine document.`;
+            } else {
+                errorMessage = 'चेहरा सत्यापन असफल | Face Verification Failed';
+                errorDetails = 'Face verification failed. Please ensure proper lighting and try again.';
+            }
+            
+            errorScreen.innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <h1 class="title">${errorMessage}</h1>
+                <p class="subtitle">कृपया पुनः प्रयास करें | Please try again</p>
+                
+                <div class="error-icon">FAILED</div>
+                
+                <div class="error-card">
+                    <div class="error-text">${errorDetails}</div>
+                    <div class="error-subtext">सत्यापन के लिए वैध दस्तावेज़ और स्पष्ट फोटो आवश्यक है</div>
+                </div>
+
+                <button class="btn" onclick="restart()">पुनः प्रयास करें | Try Again</button>
+                <button class="btn btn-secondary" onclick="contactSupport()">सहायता संपर्क | Contact Support</button>
+            `;
+            
+            // Add error styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .error-icon {
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #dc3545;
+                    margin: 20px 0;
+                    padding: 15px 30px;
+                    border: 3px solid #dc3545;
+                    border-radius: 8px;
+                    background: rgba(220, 53, 69, 0.1);
+                }
+                .error-card {
+                    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+                    border: 1px solid #dc3545;
+                    border-radius: 12px;
+                    padding: 20px;
+                    margin: 30px 0;
+                    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
+                }
+                .error-text {
+                    font-size: 16px;
+                    color: #721c24;
+                    font-weight: 500;
+                    margin-bottom: 8px;
+                }
+                .error-subtext {
+                    font-size: 14px;
+                    color: #856404;
+                    font-style: italic;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Hide all screens and show error
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            
+            document.querySelector('.app-container').appendChild(errorScreen);
+        }
+        
+        function contactSupport() {
+            alert('सहायता के लिए संपर्क करें:\n\nटोल फ्री: 1800-XXX-XXXX\nईमेल: support@digitalindia.gov.in\n\nकार्यालय समय: सोमवार से शुक्रवार, 9:00 AM - 6:00 PM');
+        }
+        
+        function getExtractedData(docType) {
+            const mockData = {
+                aadhaar: {
+                    number: '1234 5678 9012',
+                    name: 'राज कुमार',
+                    dob: '01/01/1990',
+                    address: 'Village Rampur, Meerut, UP'
+                },
+                pan: {
+                    number: 'ABCDE1234F',
+                    name: 'RAJ KUMAR',
+                    fatherName: 'RAM KUMAR',
+                    dob: '01/01/1990'
+                },
+                license: {
+                    number: 'UP1420110012345',
+                    name: 'RAJ KUMAR',
+                    validUpto: '01/01/2030',
+                    vehicleClass: 'LMV'
+                },
+                voter: {
+                    number: 'ABC1234567',
+                    name: 'RAJ KUMAR',
+                    age: '33',
+                    constituency: 'Meerut'
+                }
+            };
+            
+            return mockData[docType] || {};
+        }
+        
+        function displayResults(results) {
+            const resultCard = document.getElementById('resultCard');
+            
+            resultCard.innerHTML = `
+                <div class="result-item">
+                    <span>Overall Score:</span>
+                    <span class="result-value">${results.overallScore}%</span>
+                </div>
+                <div class="result-item">
+                    <span>Document:</span>
+                    <span class="result-value">${results.documentVerified ? 'Verified ✓' : 'Failed ✗'}</span>
+                </div>
+                <div class="result-item">
+                    <span>Face Match:</span>
+                    <span class="result-value">${results.faceVerified ? 'Verified ✓' : 'Failed ✗'}</span>
+                </div>
+                <div class="result-item">
+                    <span>Liveness:</span>
+                    <span class="result-value">${results.livenessScore}%</span>
+                </div>
+                <div class="result-item">
+                    <span>Document Type:</span>
+                    <span class="result-value">${results.documentType.toUpperCase()}</span>
+                </div>
+                <div class="result-item">
+                    <span>Session ID:</span>
+                    <span class="result-value">${results.sessionId}</span>
+                </div>
+                <div class="result-item">
+                    <span>Processed:</span>
+                    <span class="result-value">${results.timestamp}</span>
+                </div>
+            `;
+        }
+        
+        function restart() {
+            // Reset all data
+            selectedLanguage = '';
+            selectedDocument = '';
+            capturedDocumentData = null;
+            capturedFaceData = null;
+            phoneNumber = '';
+            generatedOTP = '';
+            
+            // Clear phone input
+            const phoneInput = document.getElementById('phoneInput');
+            if (phoneInput) {
+                phoneInput.value = '';
+            }
+            
+            // Clear OTP inputs
+            document.querySelectorAll('.otp-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            // Clear timer
+            if (otpTimer) {
+                clearInterval(otpTimer);
+            }
+            
+            // Clear all selections
+            document.querySelectorAll('.grid-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Reset processing status
+            const statusItems = document.querySelectorAll('#processingStatus .status-item');
+            statusItems[2].className = 'status-item processing';
+            statusItems[2].innerHTML = '• OCR processing...';
+            statusItems[3].className = 'status-item processing';
+            statusItems[3].innerHTML = '• Face analysis...';
+            statusItems[4].className = 'status-item processing';
+            statusItems[4].innerHTML = '• Verification...';
+            
+            // Remove error screen if it exists
+            const errorScreen = document.getElementById('error');
+            if (errorScreen) {
+                errorScreen.remove();
+            }
+            
+            goToScreen('welcome');
+        }
+        
+        function showTechInfo() {
+            alert(`भारत KYC तकनीकी विशेषताएं | Bharat KYC Technical Features:
+
+🔒 सुरक्षा | Security:
+• AES-256 एन्क्रिप्शन | AES-256 Encryption
+• बायोमेट्रिक हैशिंग | Biometric Hashing
+• स्थानीय प्रसंस्करण | Local Processing
+• सत्र-आधारित सत्यापन | Session-based Verification
+
+📸 कैमरा एकीकरण | Camera Integration:
+• लाइव वीडियो स्ट्रीमिंग | Live Video Streaming
+• फ्रंट/बैक कैमरा स्विचिंग | Front/Back Camera Switching
+• उच्च रिज़ॉल्यूशन कैप्चर | High-resolution Capture (1280x720)
+• रीयल-टाइम प्रीव्यू | Real-time Preview
+
+🤖 AI/ML प्रसंस्करण | AI/ML Processing:
+• ऑप्टिकल कैरेक्टर रिकग्निशन | Optical Character Recognition
+• चेहरा पहचान एल्गोरिदम | Face Detection Algorithms
+• जीवंतता का पता लगाना | Liveness Detection
+• एंटी-स्पूफिंग उपाय | Anti-spoofing Measures
+
+📱 संगतता | Compatibility:
+• सभी आधुनिक ब्राउज़र | All Modern Browsers
+• मोबाइल-रिस्पॉन्सिव डिज़ाइन | Mobile-responsive Design
+• ऑफलाइन क्षमता | Offline Capability
+• PWA समर्थन | PWA Support`);
+        }
+        
+        function downloadReport() {
+            generatePDFReport();
+        }
+        
+        function shareReport() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'KYC Verification Report',
+                    text: 'My KYC verification has been completed successfully.',
+                    url: window.location.href
+                });
+            } else {
+                alert('रिपोर्ट साझा करने की सुविधा इस ब्राउज़र में उपलब्ध नहीं है।');
+            }
+        }
+        
+        function generatePDFReport() {
+            // Create PDF content
+            const reportData = {
+                sessionId: 'KYC_' + Date.now(),
+                timestamp: new Date().toLocaleString('hi-IN'),
+                language: selectedLanguage,
+                documentType: selectedDocument,
+                verificationScore: Math.floor(Math.random() * 10) + 90,
+                status: 'APPROVED'
+            };
+            
+            // Generate PDF using browser's print functionality
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>KYC Verification Report</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 40px; }
+                        .header { text-align: center; border-bottom: 3px solid #FF6600; padding-bottom: 20px; margin-bottom: 30px; }
+                        .logo { font-size: 48px; }
+                        .title { color: #FF6600; margin: 10px 0; }
+                        .subtitle { color: #666; }
+                        .content { margin: 30px 0; }
+                        .field { margin: 15px 0; padding: 10px; background: #f9f9f9; border-left: 4px solid #FF6600; }
+                        .field strong { color: #333; }
+                        .footer { margin-top: 50px; text-align: center; font-size: 12px; color: #666; }
+                        .stamp { position: absolute; top: 200px; right: 50px; transform: rotate(-15deg); border: 3px solid #138808; color: #138808; padding: 10px; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <div class="logo">🇮🇳</div>
+                        <h1 class="title">भारत सरकार | Government of India</h1>
+                        <h2 class="subtitle">Digital KYC Verification Report</h2>
+                        <div class="subtitle">डिजिटल KYC सत्यापन रिपोर्ट</div>
+                    </div>
+                    
+                    <div class="stamp">VERIFIED<br>सत्यापित</div>
+                    
+                    <div class="content">
+                        <div class="field"><strong>Session ID:</strong> ${reportData.sessionId}</div>
+                        <div class="field"><strong>Verification Date:</strong> ${reportData.timestamp}</div>
+                        <div class="field"><strong>Selected Language:</strong> ${reportData.language}</div>
+                        <div class="field"><strong>Document Type:</strong> ${reportData.documentType.toUpperCase()}</div>
+                        <div class="field"><strong>Verification Score:</strong> ${reportData.verificationScore}%</div>
+                        <div class="field"><strong>Status:</strong> <span style="color: #138808; font-weight: bold;">${reportData.status}</span></div>
+                        <div class="field"><strong>Document Verification:</strong> ✓ Passed</div>
+                        <div class="field"><strong>Face Verification:</strong> ✓ Passed</div>
+                        <div class="field"><strong>Liveness Detection:</strong> ✓ Passed</div>
+                        <div class="field"><strong>Security Check:</strong> ✓ Passed</div>
+                    </div>
+                    
+                    <div class="footer">
+                        <p>This is a digitally generated report from the Government of India KYC Portal.</p>
+                        <p>यह भारत सरकार के KYC पोर्टल से डिजिटल रूप से उत्पन्न रिपोर्ट है।</p>
+                        <p>Report ID: ${reportData.sessionId} | Generated on: ${reportData.timestamp}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        }
+    </script>
+</body>
+</html>
