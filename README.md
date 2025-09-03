@@ -1,5 +1,7 @@
 # Bharat KYC - Digital Identity Verification Portal
 
+** #Netlify link-** https://nehalnishakyc.netlify.app/
+
 ## Overview
 A government-grade KYC (Know Your Customer) verification system with both mobile and web applications. Features real-time document capture, face verification, and comprehensive validation with professional government styling.
 
@@ -71,16 +73,16 @@ KYC/
 4. Scan QR code with Expo Go app or run on simulator
 
 ## Features Implemented
-- ✅ Real camera integration (web and mobile)
-- ✅ Document and face capture
-- ✅ Fake document detection simulation
-- ✅ Multi-language translation system
-- ✅ Professional government UI design
-- ✅ Mobile-responsive layout
-- ✅ Error handling and validation
-- ✅ PDF report generation
-- ✅ Optional phone verification (demo mode)
-- ✅ Offline-capable processing
+-  Real camera integration (web and mobile)
+-  Document and face capture
+-  Fake document detection simulation
+-  Multi-language translation system
+-  Professional government UI design
+-  Mobile-responsive layout
+-  Error handling and validation
+-  PDF report generation
+-  Optional phone verification (demo mode)
+-  Offline-capable processing
 
 ## Demo Flow
 1. **Welcome** → Start KYC (skips phone verification)
@@ -98,5 +100,4 @@ KYC/
 - **Bengali** (বাংলা)
 - **Gujarati** (ગુજરાતી)
 
-## License
-MIT License
+
